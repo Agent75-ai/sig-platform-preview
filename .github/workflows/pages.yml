@@ -23,6 +23,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Build static preview
+        run: |
+          mkdir -p _site
+          cp index.html modular-overlay.css modular-overlay.js _site/
+          sed -i 's#</head>#<link rel="stylesheet" href="modular-overlay.css"></head>#' _site/index.html
+          sed -i 's#</body>#<script src="modular-overlay.js"></script></body>#' _site/index.html
       - name: Configure Pages
         uses: actions/configure-pages@v5
         with:
@@ -30,7 +36,7 @@ jobs:
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
