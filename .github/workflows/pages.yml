@@ -26,9 +26,9 @@ jobs:
       - name: Build static preview
         run: |
           mkdir -p _site
-          cp index.html modular-overlay.css modular-overlay.js _site/
+          cp index.html modular-overlay.css modular-overlay.js requirements-catalog-v2.js _site/
           sed -i 's#</head>#<link rel="stylesheet" href="modular-overlay.css"></head>#' _site/index.html
-          sed -i 's#</body>#<script src="modular-overlay.js"></script></body>#' _site/index.html
+          sed -i 's#</body>#<script src="modular-overlay.js"></script><script src="requirements-catalog-v2.js"></script></body>#' _site/index.html
       - name: Configure Pages
         uses: actions/configure-pages@v5
         with:
